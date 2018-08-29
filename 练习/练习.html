@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单利模式</title>
+</head>
+<body>
+	<script>
+		function Minister(name){
+			this.name=name;
+		}
+		Minister.prototype.say = function(){
+			console.log(this.name+":大王，冤枉啊！")；
+		};
+		function Emperor(){
+			this.name="大王";
+			this.id=Math.random();
+		}
+		Emperor.prototype.say=function(){
+		 console.log(this.name+this.id+":滚......");
+		};
+		var minister1=new Minister("张三")；
+		var emperor1=new Emperor();
+		var minister2=new Minister("李四")；
+		var emperor2=new Emperor();
+		var minister3=new Minister("王麻子")；
+		var emperor3=new Emperor();
+		minister1.say();
+		emperor1.say();
+		minister2.say();
+		emperor2.say();
+		minister3.say();
+		emperor3.say();
+
+
+		function Minister(name){
+			this.name=name;
+		}
+		Minister.prototype.say=function(){
+			console.log(this.name+":大王，冤枉啊！")；
+		}；
+		function Emperor(){
+			this.name="大王"；
+			this.id=Math.random();
+			this.instance=null;
+		}
+		Emperor.prototype.say=function(){
+			console.log(this.name+this.id+":滚...")；
+		}；
+		Emperor.getInstance=function(){
+			if(!this.instance){
+				this.instance=new Emperor();
+			}
+			return this.instance;
+		};
+		var minister1=new Minister("张三")；
+		var emperor1=Emperor.getInstance();
+		var minister2=new Minister("李四")；
+		var emperor2=Emperor.getInstance();
+		var minister3=new Minister("王麻子")；
+		var emperor3=Emperor.getInstance();
+		minister1.say();
+		emperor1.say();
+		minister2.say();
+		emperor2.say();
+		minister3.say();
+		emperor3.say();
+
+
+		function Minister(name){
+			this.name=name;
+		}
+		Minister.prototype.say=function(){
+			console.log(this.name+":大王，冤枉啊！")；
+		}；
+		function Emperor(){
+			this.name=name;
+			this.id=Math.random();
+		}
+		Emperor.prototype.say=function(){
+			console.log(this.name+this.id+":滚...");
+		};
+		Emperor.getInstance=(function(){
+			var instance=null;
+			return function(){
+				if(!instance){
+					instance=new Emperor();
+				}
+				return instance;
+			};
+		})();
+		var minister1=new Minister("张三");
+		var emperor1=Emperor.getInstance();
+		var minister2=new Minister("李四");
+		var emperor2=Emperor.getInstance();
+		var minister3=new Minister("王麻子");
+		var emperor3=Emperor.getInstance();
+		minister1.say();
+		emperor1.say();
+		minister2.say();
+		emperor2.say();
+		minister3.say();
+		emperor3.say();
+
+
+		function Minister(name){
+			this.name=name;
+		}
+		Minister.prototype.say=function(){
+			console.log(this.name+":大王，冤枉啊！");
+		};
+
+		var Emperor=(function(){
+			var instance=null
+			function Emperor(){
+				if(instance){
+					return instance;
+				}
+				this.name="大王";
+				this.id=Math.random();
+				return instance=this;
+
+			}
+			Emperor.prototype.say=function(){
+				console.log(this.name+this.id+":滚...");
+			};
+			return Emperor;
+		})();
+		var minister1=new Minister("张三");
+		var emperor1=new Emperor();
+		var minister2=new Minister("李四");
+		var emperor2=new Emperor();
+		var minister3=new Minister("王麻子");
+		var emperor3=new Emperor();
+		minister1.say();
+		emperor1.say();
+		minister2.say();
+		emperor2.say();
+		minister3.say();
+		emperor3.say();
+
+
+
+
+	</script>
+
+	<script>
+		var loginLayer=(function(){
+			var loginLayer=document.creatElement("div");
+			loginLayer.id="loginLayer";
+			loginLayer.innerHTML="登录窗口";
+			loginLayer.style.display="none";
+			document.body.appendChild(loginLayer);
+			return loginLayer;
+		})();
+
+		var maskLayer=(function(){
+			var maskLayer=document.createElement("div");
+			maskLayer.id="maskLayer";
+			maskLayer.style.dispaly="none";
+			document.body.appendChild(maskLayer);
+			return maskLayer;
+		})();
+		document.getElementById("loginBtn").onclick=
+		function(){
+			loginLayer.style.display="block";
+			maskLayer.style.display="block";
+		};
+
+
+		function createLoginLayer(){
+			var loginLayer=document.createElement("div");
+			loginLayer.id="loginLayer";
+			loginLayer.innerHTML="登录窗口"；
+			loginLayer.style.display="none";
+			document.body.appendChild(loginLayer);
+			return loginLayer;
+
+
+		}
+		function createMaskLayer(){
+			var maskLayer = document.createElement('div');
+			maskLayer.id = 'maskLayer';
+			maskLayer.style.display = 'none';
+			document.body.appendChild(maskLayer);
+			return maskLayer;
+		}
+
+		document.getElementById("loginBtn").onclick=
+		function(){
+			var loginLayer=createLoginLayer;
+			var maskLayer=createMaskLayer;
+			loginLayer.style.display = 'block';
+		    maskLayer.style.display = 'block';
+		}
+
+
+
+		function createLoginLayer(){
+			var loginLayer=document.createElement("div");
+			loginLayer.id = 'loginLayer';
+			loginLayer.innerHTML = '登录窗口';
+			loginLayer.style.display = 'none';
+			document.body.appendChild(loginLayer);
+			return loginLayer;
+		}
+
+		function createMaskLayer(){
+			var maskLayer=document.createElement("div");
+			maskLayer.id = 'maskLayer';
+			maskLayer.style.display = 'none';
+			document.body.appendChild(maskLayer);
+			return maskLayer;
+
+        }
+        function getSingleton(fn){
+        	var instance=null;
+        	return function(){
+        		return instance||(instance=fn.apply(null,arguments));
+        	};
+        }
+
+        var createSingletonLoginLayer=getSingleton(createLoginLayer);
+        var createSingletonMaskLayer=getSingleton(createMaskLayer);
+        document.getElementById('loginBtn').onclick = function () {
+		var loginLayer = createSingletonLoginLayer();
+		var maskLayer = createSingletonMaskLayer();
+		loginLayer.style.display = 'block';
+		maskLayer.style.display = 'block';
+	}
+
+
+
+
+		
+
+
+
+		
+
+
+
+
+	</script>
+</body>
+</html>

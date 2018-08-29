@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p class="example" onclick="console.log('Click')">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident optio dolorum quos non expedita, ad architecto minus voluptatum praesentium. Possimus accusantium dicta similique alias eveniet saepe commodi vero debitis laudantium.
+	</p>
+	<div id="p1">
+		<div id="p1-1">
+			<div id="p1-1-1">
+				<div id="p1-1-1-1">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam blanditiis, dolorum debitis veritatis magnam. Minima sapiente, reiciendis, delectus incidunt non blanditiis sint quis beatae quia, exercitationem harum nesciunt excepturi esse?
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById('example').onclick=function(event){
+			console.log('Click me');
+		}
+		document.getElementById('example').onclick=function(event){
+			event=event||window.event;
+			console.log('Click me2');
+		}
+
+		document.getElementById('p1').onclick=function(event){
+			console.log('Click p1');
+		}
+
+		document.getElementById('p1-1-1-1').onclick=function(event){
+			console.log('Click p1-1-1-1');
+			event.cancleBubble=true;
+			//event.stopPropagation();
+		}
+
+		$(function(){
+			$('p').on('click',null,null,function(e){
+				console.log('p clicked');
+			}).on('click',function(e){
+				console.log('p clicked2');
+			}).on('click',function(e){
+				console.log('p clicked3');
+			});
+
+			$('div').on('click','#p1-1',{foo:'bar'},function(event){
+				console.log('p clicked %o',event.data);
+			}).on('mouseover','#p1-1',{foo:'bar'},function(event){
+				console.log('p mouseover %o',event.data);
+			})
+
+			$('li').on('click',function(event){
+				console.log('%o li clicked',$(this));
+			});
+
+			$('ul').on('click',function(event){
+				console.log('%o Clicked',$(event.target));
+			})
+
+			$('p').on('click',function(e){
+				e.stopPropagation();
+				console.log('%o clicked',$(this));
+			})
+
+			$('div').on('click',function(e){
+				e.stopPropagation();
+				console.log('%o clicked',$(this));
+			})
+
+			$(function(){
+				var clicked2=function(){
+					console.log('clicked2');
+				};
+
+				$('p').on('click',function(){
+					console.log('clicked');
+				}).on('click',clicked2).on('mouseover',function(){
+					console.log('mouseover');
+				})
+				$('p').off('click');
+				$('p').off('click',clicked2);
+				$('p').off('click mouseover');
+				$('p').off();
+
+           })
+
+			function(){
+				$('div').on('click',function(event){
+					event.stopPropagation();
+					console.log('clicked %o',$(this));
+
+				}).on('click',function(event){
+					console.log('clicked2 %o',$(this));
+				})
+				$('div').on('click',function(event){
+					event.stopImmediatePropagation();
+					console.log('clicked %o',$(this));
+				}).on('click',function(event){
+					console.log('clicked2 %o',$(this));
+				});
+			}
+
+})
+
+	</script>	
+
+	<script>
+		$('#all').on('click',function(){
+			console.log($('li').trigger('click',[1,2]));
+		}
+		$('li').on('click',function(event,arg1,arg2){
+			console.log('已读 %o',%(this));
+			console.log(arg1);
+			console.log(arg2);
+			return '123';
+		})
+		$('#all').on('click',function(){
+			$('li').trigger('click');
+			$('li').triggerHandler('click');
+			console.log($('li').triggerHandler('click'));
+			console.log($('li').trigger('click').triggrt('click'));
+		})
+
+		$('li:odd').on('click.even',function(e){
+			console.log('%o 偶数'.%(this));
+		})
+		$('li:even').on('click.odd',function(e){
+			console.log('%o 奇数'，$(this));
+		})
+		$('li').eq(0).on('click.even.0', function(e) {
+            console.log('%o 0', $(this));
+        });
+        $('#even').click(function() {
+            $('li').trigger('click.even');
+        });
+        $('#odd').click(function() {
+            $('li').trigger('click.odd');
+        });
+        $('li').off('.even');
+
+
+	</script>
+			
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+	
+	
+</body>
+</html>

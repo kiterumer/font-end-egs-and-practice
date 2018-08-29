@@ -1,0 +1,98 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"> 
+    <title></title>
+    <style type="text/css">
+     .box{
+      position:relative;
+      width:200px;
+      height:200px;
+      margin:0 auto;
+     }
+        .wrap{
+
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: red;
+           
+           border-radius: 30px;
+           /*transform: rotate(0deg);*/
+        }
+        .wrap:hover{
+        transform: rotate(360deg);
+        transition: transform ease-in-out 1.5s;
+        }
+        .inner{
+          position:absolute;
+          top:0;
+          left:0;
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            border-radius:30px 0 0 0;
+            
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="box">
+      <div class="wrap"></div> 
+     
+       <div class="inner"></div>   
+     </div>     
+       
+  
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>3-1作业</title>
+    <style>
+        div {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 50px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 200px;
+            height: 50px;
+            margin: auto;
+            cursor: pointer;
+            text-align: center;
+            background: #abcdef;
+            /*此处写代码*/
+            /*transform:rotate(0deg);*这一句得强调*/
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+        /*此处写代码*/
+        div:hover {
+            cursor:pointer;
+            /*transform: scale(2,2);*/
+            transform: scale(2) rotate(360deg);
+            /*-webkit-transform: scale(2) rotate(360deg);*/
+            /*下面的也需要去掉。已经在上面的div中定义了*/
+            /*-webkit-transition:transform 2s ease-in-out 1s;*/
+            /*-moz-transition:transform 2s ease-in-out 1s;*/
+            /*-o-transition:transform 2s ease-in-out 1s;*/
+            /*transition:transform 2s ease-in-out 1s;*/
+        }
+ 
+    </style>
+</head>
+<body>
+<div>www.imooc.com</div>
+</body>
+</html>
+

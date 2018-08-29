@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	$(document).ready(function($){
+		//登录链接事件
+		//$("#loginLink").click(function(){
+		//显示弹出层遮罩
+		//$("#layer-mask").show();
+		// 显示弹出层窗体
+		// $("#layer-pop").show();
+		// 弹出层关闭按钮绑定事件
+		//  $("#layer-close").click(function(){
+		//  //弹出层关闭
+		//  $("#layer-mask").hide();
+		//  $("#layer-pop").hide();
+		//  });
+		//});
+		//登录链接事件
+		$("#loginLink").click(function(){
+			var loginHtml=$("#loginHtml").html();
+			showLayer(loginHtml,500,300,closeCallback);
+			$("loginSubmitBtn").click(function(){
+				var username=$("input[name='username']").val();
+				var password=$("input[name='password']").val();
+				if(username==='imooc'&&password==='imooc'){
+					alert("登陆成功");
+				}else{
+					$(".error-msg").html("账号或密码输入错误");
+				}
+			});
+		});
+		$("#regeLink").click(function(){
+			var regeHtml=$("#regeHtml").html();
+			showLayer(regeHtml,500,300,closeCallback);
+			$("#regeSubmitBtn").click(function(){
+				var username=$("input[name='username']").val();
+				var password=$("input[name='password']").val();
+				var repassword=$("input[name='repassword']").val();
+				if(username==='imooc'&&password==='imooc'&&repassword===password){
+					alert("注册成功");
+				}else{
+					$(".error-msg").html("账号或密码输入错误");
+				}
+			});
+		});
+		function closeCallback(){
+			$(".error-msg").html("");
+		}
+
+
+		function showlayer(html,width,height,closeCallback){
+			$("#layer-mask").show();
+			$("#layer-pop").show();
+			$("#layer-pop").caa({
+				width:width,
+				height:height
+			});
+			$("#layer-content").html(html);
+			$("#layer-close").click(function(){
+				hideLayer();
+				closeCallback();
+			});
+		}
+
+		function hideLayer(){
+			$("#layer-mask").hide();
+			$("#layer-pop").hide();
+		}
+	})
+
+
+	
+
+
+
+
+
+
+
+
+
+</script>

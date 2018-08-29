@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	<script >
+		console.log(123);
+		var bool=true,string1="hello",string2="world",num=123456;
+		var result1=bool+string1,
+		    result2=num+string1,
+		    result3=string1+string2;
+		console.log("布尔值和字符串相加结果是："+result1+",相加后的数据类型是："+typeof result1);
+		console.log("数字和字符串相加结果是："+result2+",相加后的数据类型是："+typeof result2);
+		console.log("字符串和字符串相加结果是："+result3+",相加后的数据类型是："+typeof result3);
+
+		var x=1,y=2;
+		// ++x;--y;
+		
+		var result=(++x)+(--y);
+		console.log(result);    
+		console.log(x);
+		console.log(y);  
+		// ++/-- 在变量的前面，变量自身+1或-1,然后在进行运算； 3 2 1
+
+		var m=1,n=2;
+		var result=(++m)+(n--);
+		console.log(result);
+		console.log(m);
+		console.log(n);
+        // ++/--在变量的后面，变量先进行运算，然后在赋值；++m先赋值再运算，m就是2,；n--先参与运算再赋值，故n就是2，所以结果是4，m为2，y为1 
+        
+
+        // function Person(){
+
+        // }
+        // Person.prototype.name="Nicholas";
+        // Person.prototype.age=29;
+        // Person.prototype.job="Software Engineer";
+        // Person.prototype.sayName=function(){
+        // 	alert(this.name);
+        // }
+        // var person1=new Person();
+        // person1.sayName();
+
+        // var person2=new Person();
+        // person2.sayName();
+        // alert(person1.sayName==person2.sayName);
+
+
+        // 工厂模式
+        // function createPerson(name,age,job){
+        // 	var o=new Object();
+        // 	o.name=name;
+        // 	o.age=age;
+        // 	o.job=job;
+        // 	o.sayName=function(){
+        // 		alert(this.name);
+        // 	};
+        // 	return o;
+        // }
+        // var person1=createPerson("Nicholas",29,"Software Engineer");
+        // var person2=createPerson("Greg",27,"Doctor");
+        // person1.sayName();
+        // person2.sayName();
+        // alert(person1.job);
+
+
+        // 构造函数模式
+        function Person(name,age,job){
+        	this.name=name;
+        	this.age=age;
+        	this.job=job;
+        	this.sayName=function(){
+        		alert(this.name);
+        	};
+        }
+        var person1=new Person("Nicholas",29,"Software Engineer");
+        var person2=new Person("Greg",27,"Doctor");
+        按照惯例，构造函数始终都应该以一个大写字母开头，而非构造函数则应该以一个小写字母开头。
+        要创建Person的新实例，必须使用new操作符。
+        person1 person2 分别保存着Person的一个不同的实例，两个对象都有一个constructor(构造函数)属性，该属性指向Person。
+        
+        // 当做构造函数使用
+        var person=new Person("Nicholas",29,"Software Engineer");
+        person.sayName();  //"Tom"
+
+        // 作为普通函数调用
+        Person("Greg",27,"Doctor");  //添加到window
+        window.sayName();  //"Greg"
+
+        // 在另一个对象的作用域中调用
+        var o=new Object();
+        Person.call(o,"Kristen",25,"Nurse");
+        o.sayName();   //"Kristen"
+
+
+        // 原型模式
+        function Person(){
+
+        }
+        Person.prototype.name="Nicholas";
+        Person.prototype.age=29;
+        Person.prototype.job="Software Engineer";
+        Person.prototype.sayName=function(){
+        	alert(this.name);
+        };
+        var person1=new Person();
+        var person2=new Person();
+        alert(person1.sayName==person2.sayName);  //true
+        // person1 person2 访问的都是同一组属性和同一个sayName()函数
+
+        // 更简单的原型语法
+        function Person(){
+
+        }
+        Person.prototype={
+        	name:"Nicholas",
+        	age:29,
+        	job:"Software Engineer",
+        	sayName:function(){
+        		alert(this.name)
+        	}
+        };
+
+
+        String.prototype.startsWith=function(text){
+        	return this.indexOf(text)==0;
+        };
+
+        var msg="Hello World";
+        alert(msg.startsWith("Hello"));   //true
+
+        // 组合使用构造函数模式和原型模式
+        function Person(name,age,job){
+        	this.name=name;
+        	this.age=age;
+        	this.job=job;
+        	this.friends=["Shelby","Court"];
+        }
+        Person.prototype={
+        	constructor:Person,
+        	sayName:function(){
+        		alert(this.name);
+        	}
+
+        }
+        var person1=new Person("Nicholas",29,"Software Engineer");
+        var person2=new Person("Greg",27,"Doctor");
+
+        person1.friends.push("Van");
+        alert(person1.friends);   //"Shelby","Court","Van"
+        alert(person2.friends);    //"Shelby","Court"
+        alert(person1.friends==person2.friends);  //false
+        alert(person1.sayName==person2.sayName);   //true
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>create方法</title>
+</head>
+<body>
+	<script>
+		myReady(function(){
+			var comment=document.createComment("A comment");
+			var fragment=document.createDocumentFragment();
+			var ul=document.getElementById("myList");
+			var li=null;
+			for (var i=0;i<3;i++){
+				li=document.createElement("li");
+				li.appendChild(document.createTextNode("Item"+(i+1)));
+				fragment.appendChild(li);
+			}
+			ul.appendChild(fragment);
+			document.body.insertBefore(comment,document.body.firstChild);
+		});
+	</script>
+
+	<script>
+		myReady(function(){
+			var myUI=document.getElementById("myUI");
+			console.log(myUI.childNodes.length);
+			var secondChild=myUI.removeChild(myUI.childNodes[1]);
+			console.log(secondChild);
+			console.log(myUI.childNodes.length);
+		});
+
+		myReady(function(){
+			var div=document.createElement("div");
+			document.body.removeChild(document.body.appendChild(div));
+			var myUI=document.getElementById("myUI");
+			myUI.parentNode.removeChild(myUI);
+			console.log(myUI.id+":"+myUI.innerHTML);
+			var myUI2=document.getElementById("myUI2");
+			myUI2.parentNode.innerHTML="";
+			console.log(myUI2.id+":"+myUI2.innerHTML);
+
+
+			var myUl=document.getElementById("myUl");
+			var removeNode=myUl.removeNode(true);
+			console.log(removeNode.outerHTML);
+
+			var myUI=document.getElementById("myUI");
+			var txt=document.createTextNode("4");
+			var li=document.createElement("li")；
+			var firstLi=myUI.firstElementChild;
+			li.appendChild(txt);
+			myUI.appendChild(li);
+			var returnedNode=myUI.appendChild(firstLi);
+			console.log(returnedNode);
+
+			var myUI=document.getElementById("myUI");
+			var newNode=myUI.cloneNode(true);
+			console.log(newNode);
+			document.body.appendChild(newNode);
+
+			function(){
+				var box=document.getElementById("box");
+				for(var i=0,len=box.childNodes.length;i<len;i++){
+					console.log(box.childNodes[i]);
+				}
+			}
+
+
+			function(){
+				var box=document.getElementById("box");
+				for(var i=0,len=box.childNodes.length;i<len;i++){
+					if(box.childNodes[i].nodeType==1){
+						console.log(box.childNodes[i]);
+					}
+				}
+			}
+
+
+			function(){
+				var box=document.getElementById("box");
+				for(var i=0,len=box.childElementCount;i<len;i++){
+					console.log(box.children[i]);
+				}
+			}
+
+			function(){
+				var scripts=document.scripts;
+				var links=document.links;
+				var cells=document.getElementById("tr").cells;
+				var imgs=document.images;
+				var forms=document.forms;
+				var options=document.getElementById("select").options;
+				var ps=document.getElementsByTagName("p");
+
+				console.log(cells.namedItem("td"));
+
+            }
+
+
+            function(){
+            	var myDiv=document.getElementById("myDiv");
+            	var ul=document.querySelector("#myUI");
+            	var li=myDiv.querySelector("li:last-child");
+            	var els=document.querySelector("input,li");
+            	var span=document.querySelector("span");
+            	var input=document.querySelector(".foo\\:bar");
+
+            	console.log(input);
+            }
+
+            function(){
+            	var myDiv=document.getElementById("myDiv");
+            	var ul=myDiv.querySelectAll("ul");
+            	var li=myDiv.querySelectAll("li");
+            	var span=myDiv.querySelectAll("span");
+            	console.log(span);
+            	console.log(ul);
+            	console.log(li);
+            }
+
+            function(){
+            	var divs=document.querySelectorAll("div");
+            	var i=0;
+            	while(i<divs.length){
+            		document.body.appendChild(document.createElement("div"));
+            		i++;
+            	}
+            }
+
+            function(){
+            	var bn=document.getElementById("button");
+            	bn.onclick=function(){
+            		var target=document.getElementById("target");
+            		console.log(target.innerHTML);
+            	}
+            }
+
+
+
+
+
+
+		});
+
+
+
+	</script>
+	
+</body>
+</html>
